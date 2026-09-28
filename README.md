@@ -16,8 +16,12 @@ Conventional Commits, merges, resolução de conflitos, versionamento e Pull Req
 
 **Nome da equipe:**
 
+
+**Nome da equipe:** Gabriel e Ricardo
+
 | Nome | Usuário do GitHub |
 | ---- | ----------------- |
+| Gabriel Corvello Moraes | @GabrielMoraes-dev |
 
 ## Sumário
 
