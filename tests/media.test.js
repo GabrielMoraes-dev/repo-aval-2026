@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
-import { calcularMedia, obterSituacao } from '../src/media.js';
+import { calcularMedia, formatarMedia, obterSituacao } from '../src/media.js';
 
 describe('calcularMedia', () => {
   test('retorna a própria nota quando há apenas uma', () => {
@@ -20,23 +20,41 @@ describe('calcularMedia', () => {
   });
 
   test('lança erro para nota negativa', () => {
-  assert.throws(() => calcularMedia([-1, 7, 8]), /Nota inválida/);
+    assert.throws(() => calcularMedia([-1, 7, 8]), /Nota inválida/);
   });
 
   test('lança erro para nota maior que 10', () => {
-  assert.throws(() => calcularMedia([7, 8, 11]), /Nota inválida/);
+    assert.throws(() => calcularMedia([7, 8, 11]), /Nota inválida/);
   });
 
   test('lança erro quando uma nota não é número', () => {
-  assert.throws(() => calcularMedia([7, '8', 9]), /Nota inválida/);
+    assert.throws(() => calcularMedia([7, '8', 9]), /Nota inválida/);
   });
 
   test('lança erro para NaN', () => {
-  assert.throws(() => calcularMedia([7, NaN, 9]), /Nota inválida/);
+    assert.throws(() => calcularMedia([7, NaN, 9]), /Nota inválida/);
   });
 
   test('aceita as notas limite 0 e 10', () => {
-  assert.equal(calcularMedia([0, 10]), 5);
+    assert.equal(calcularMedia([0, 10]), 5);
+  });
+});
+
+describe('formatarMedia', () => {
+  test('formata média decimal com uma casa e vírgula', () => {
+    assert.equal(formatarMedia(7.666666666666667), '7,7');
+  });
+
+  test('formata número inteiro com uma casa decimal', () => {
+    assert.equal(formatarMedia(7), '7,0');
+  });
+
+  test('formata nota máxima com uma casa decimal', () => {
+    assert.equal(formatarMedia(10), '10,0');
+  });
+
+  test('arredonda a média para uma casa decimal', () => {
+    assert.equal(formatarMedia(5.25), '5,3');
   });
 });
 
@@ -46,8 +64,8 @@ describe('obterSituacao', () => {
   });
 
   test('retorna "Aprovado" para média igual a 7', () => {
-  assert.equal(obterSituacao(7), 'Aprovado');
-  }); 
+    assert.equal(obterSituacao(7), 'Aprovado');
+  });
 
   test('retorna "Recuperação" para média entre 5 e 7', () => {
     assert.equal(obterSituacao(6), 'Recuperação');
