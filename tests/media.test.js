@@ -59,8 +59,16 @@ describe('formatarMedia', () => {
 });
 
 describe('obterSituacao', () => {
-  test('retorna "Aprovado" para média acima da média de aprovação', () => {
-    assert.equal(obterSituacao(8.5), 'Aprovado');
+  test('retorna "Aprovado com distinção" para média igual a 9', () => {
+    assert.equal(obterSituacao(9), 'Aprovado com distinção');
+  });
+
+  test('retorna "Aprovado com distinção" para média 10', () => {
+    assert.equal(obterSituacao(10), 'Aprovado com distinção');
+  });
+
+  test('retorna "Aprovado" para média abaixo de 9 e acima de 7', () => {
+    assert.equal(obterSituacao(8.9), 'Aprovado');
   });
 
   test('retorna "Aprovado" para média igual a 7', () => {
